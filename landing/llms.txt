@@ -1,0 +1,31 @@
+# Talentra
+
+> Talentra es una herramienta para analizar currículums (CV) pensada para equipos de selección y recursos humanos. Lee el archivo de CVs de una empresa, extrae la experiencia, las habilidades, los idiomas y las empresas anteriores de cada candidato, y permite encontrar a quien encaja con filtros o escribiendo con tus palabras. No descarta ni puntúa a nadie: la decisión es siempre de una persona.
+
+Estado: acceso anticipado con lista de espera (gratis y sin compromiso). Idioma: español. Funciona desde el navegador, sin instalar nada.
+
+## Qué hace
+
+- Analiza currículums: experiencia, años en cada habilidad, idiomas y nivel, estudios, ubicación y empresas anteriores.
+- Muestra la frase del CV original que respalda cada dato, para comprobarlo de un vistazo; si algo no está claro, avisa para revisarlo.
+- Búsqueda con filtros combinables: experiencia, idiomas, ubicación, empresas anteriores, herramientas.
+- Búsqueda escribiendo con tus palabras (por ejemplo, «alguien que haya abierto mercado en Latinoamérica»), aunque el CV lo exprese de otra forma.
+- Organizaciones con perfiles de distintos permisos para todo el equipo.
+
+## Qué no hace
+
+- No descarta candidatos ni toma decisiones automatizadas de empleo.
+- No puntúa ni hace rankings de personas.
+- No publica ofertas de empleo (no es un ATS).
+
+## Para quién
+
+Equipos de selección, recruiters y departamentos de recursos humanos que acumulan cientos o miles de CVs y quieren volver a encontrar a candidatos que ya les enviaron su currículum.
+
+## Enlaces
+
+- [Web](https://solutions-with-ai.github.io/talentra-landing/): presentación del producto y lista de espera
+- [Preguntas frecuentes](https://solutions-with-ai.github.io/talentra-landing/#preguntas)
+- [Política de privacidad](https://solutions-with-ai.github.io/talentra-landing/privacidad.html)
+- [Términos y condiciones](https://solutions-with-ai.github.io/talentra-landing/terminos.html)
+- Contacto: hola@talentra.example

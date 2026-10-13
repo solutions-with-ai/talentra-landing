@@ -8,7 +8,7 @@
  * Eventos que se envían (además de la visita a cada página, que registra Plausible por su cuenta):
  *   Waitlist click   · abre el formulario de lista de espera       · props: location (nav, hero-pill, hero, cta)
  *   Waitlist start   · empieza a rellenarlo                         · props: location
- *   Waitlist submit  · lo envía correctamente                       · props: location, volume (CVs que dice tener)
+ *   Waitlist submit  · lo envía correctamente                       · props: location
  *   Waitlist abandon · lo cierra tras empezar sin enviarlo          · props: location
  *   Waitlist error   · el envío falla                               · props: location
    (los cuatro últimos se envían desde waitlist.js)
@@ -19,6 +19,7 @@
  *   Engaged time     · tiempo con la pestaña visible, al salir       · props: bucket
  *   Theme toggle     · cambia el tema                                · props: to
  *   Menu open        · abre el menú del móvil
+ *   Legal open       · abre un documento legal o el contacto en la ventana emergente · props: doc (desde legal-popup.js)
  */
 (() => {
   const ANALYTICS = {

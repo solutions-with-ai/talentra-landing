@@ -63,7 +63,6 @@
   const rules = [
     [form.elements.nombre, (el) => (el.value.trim() ? "" : "Escribe tu nombre.")],
     [form.elements.email, (el) => (!el.value.trim() ? "Escribe tu email." : emailOk(el.value) ? "" : "Este email no parece válido.")],
-    [form.elements.empresa, (el) => (el.value.trim() ? "" : "Escribe el nombre de tu empresa.")],
     [form.elements.consentimiento, (el) => (el.checked ? "" : "Necesitamos tu permiso para guardar tus datos.")],
   ];
   const validate = () => {
@@ -117,7 +116,7 @@
     try {
       if (!isBot) await send(data);
       sent = true;
-      track("Waitlist submit", { location: source, volume: data.get("volumen") || "sin respuesta" });
+      track("Waitlist submit", { location: source });
       dlg.querySelector("#wlDoneEmail").textContent = data.get("email");
       formStep.hidden = true;
       doneStep.hidden = false;
@@ -129,7 +128,7 @@
     } finally {
       submitBtn.disabled = false;
       submitBtn.removeAttribute("aria-busy");
-      submitLabel.textContent = "Quiero acceso anticipado";
+      submitLabel.textContent = "Quiero tener acceso anticipado";
     }
   });
 

@@ -1,0 +1,19 @@
+# Talentra · todos los buscadores y asistentes de IA pueden leer la web
+User-agent: *
+Allow: /
+
+# Rastreadores de IA (búsqueda y respuestas): permitidos explícitamente
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://solutions-with-ai.github.io/talentra-landing/sitemap.xml

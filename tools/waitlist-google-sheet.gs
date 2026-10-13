@@ -15,7 +15,7 @@
  */
 const SHEET_NAME = "Lista de espera";
 const FIELDS = [
-  "fecha", "nombre", "email", "empresa", "cargo", "volumen", "consentimiento",
+  "fecha", "nombre", "email", "empresa", "cargo", "consentimiento",
   "fuente", "pagina", "referrer", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term",
 ];
 
