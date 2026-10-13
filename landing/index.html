@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talentra — Contrata del talento que ya tienes</title>
+  <meta name="description" content="Encuentra a las personas que encajan entre los CVs que ya tienes. Fácil de usar y sin descartes automáticos: la decisión siempre es tuya." />
+  <link rel="canonical" href="https://solutions-with-ai.github.io/talentra-landing/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Talentra" />
+  <meta property="og:url" content="https://solutions-with-ai.github.io/talentra-landing/" />
+  <meta property="og:title" content="Talentra — Contrata del talento que ya tienes" />
+  <meta property="og:description" content="Tu próximo fichaje ya te mandó su CV. Talentra lo encuentra." />
+  <meta property="og:image" content="https://solutions-with-ai.github.io/talentra-landing/logo.png" />
+  <meta property="og:image:alt" content="Logo de Talentra" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#0b1020" />
+  <script>
+    document.documentElement.classList.add("js");
+    try { if (localStorage.getItem("talentra-theme") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}
+  </script>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+  <link rel="preload" href="fonts/red-hat-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="constellation" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a class="brand" href="#top"><img src="logo.png" alt="" width="34" height="34" />Talentra</a>
+    <nav class="nav-links" id="navLinks" aria-label="Principal">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#personas">Personas</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar a modo claro">
+        <svg class="i-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" /></svg>
+        <svg class="i-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" /></svg>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </button>
+      <a class="btn btn-small" href="#lista-espera" data-waitlist data-track="nav">Lista de espera</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" data-section="hero">
+      <div class="hero-copy">
+        <a class="pill pill-hot reveal" href="#lista-espera" data-waitlist data-track="hero-pill"><span class="dot"></span><b>Acceso anticipado</b><span class="arrow">→</span></a>
+        <h1 class="reveal">
+          Tu próximo fichaje<br />
+          <span class="grad">ya te mandó su CV.</span><br />
+          <em>Solo tienes que encontrarlo.</em>
+        </h1>
+        <p class="lead reveal">
+          Sube tus CVs y filtra según tus necesidades. Verás a las personas que encajan, sin descartar
+          a nadie, sin elegir por ti y sin complicaciones.
+        </p>
+        <div class="hero-cta reveal">
+          <a class="btn" href="#lista-espera" data-waitlist data-track="hero">Apuntarme a la lista de espera <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#como-funciona">Ver cómo funciona</a>
+        </div>
+      </div>
+
+      <!-- Live product mockup -->
+      <div class="hero-stage reveal" id="stage">
+        <div class="mock tilt" id="mock">
+          <div class="mock-bar">
+            <span></span><span></span><span></span>
+            <div class="mock-url">Talentra · Buscar</div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-search">
+              <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span id="typed"></span><span class="caret"></span>
+            </div>
+            <div class="mock-filters" id="chips">
+              <span class="chip">Ventas</span>
+              <span class="chip">5+ años</span>
+              <span class="chip">Madrid</span>
+              <span class="chip">Inglés C1</span>
+            </div>
+            <div class="mock-results" id="results">
+              <article class="result">
+                <div class="avatar" style="--h:330">LM</div>
+                <div class="r-main">
+                  <strong>Laura M.</strong>
+                  <small>Key Account Manager · Madrid · 7 años</small>
+                  <div class="tags"><i>Ventas 6 años</i><i>Negociación</i><i>Inglés C1</i></div>
+                </div>
+                <span class="see">Ver CV</span>
+              </article>
+              <article class="result">
+                <div class="avatar" style="--h:265">DR</div>
+                <div class="r-main">
+                  <strong>Diego R.</strong>
+                  <small>Comercial · Madrid · 5 años</small>
+                  <div class="tags"><i>Ventas 5 años</i><i>Retail</i><i>Inglés C1</i></div>
+                </div>
+                <span class="see">Ver CV</span>
+              </article>
+              <article class="result">
+                <div class="avatar" style="--h:160">AS</div>
+                <div class="r-main">
+                  <strong>Ana S.</strong>
+                  <small>Directora comercial · Remoto · 9 años</small>
+                  <div class="tags"><i>Ventas 8 años</i><i>Liderazgo</i><i>Inglés C1</i></div>
+                </div>
+                <span class="see">Ver CV</span>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="float-card evidence-card" data-depth="1.6">
+          <small>Prueba · Ventas</small>
+          <p>“…gestioné la <mark>cartera de grandes cuentas</mark> y aumenté la facturación un 30% en dos años…”</p>
+          <span>Del CV de Laura Martín</span>
+        </div>
+        <div class="float-card status-card" data-depth="-1.2">
+          <div class="ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" pathLength="100"/></svg><b>✓</b></div>
+          <div><strong>1.284 perfiles</strong><small>organizados · 23 para revisar</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee" aria-label="Estados y capacidades">
+      <div class="marquee-track">
+        <span>Deja de pagar por candidatos que ya tienes</span><span aria-hidden="true">✦</span>
+        <span>Fácil desde el primer día</span><span aria-hidden="true">✦</span>
+        <span>No descarta a nadie</span><span aria-hidden="true">✦</span>
+        <span>Busca como hablas</span><span aria-hidden="true">✦</span>
+        <span>Filtra hasta dar con quien buscas</span><span aria-hidden="true">✦</span>
+        <span>Detrás de cada CV hay una persona</span><span aria-hidden="true">✦</span>
+        <span>Todo tu equipo, cada uno con su acceso</span><span aria-hidden="true">✦</span>
+        <span>Tú decides, siempre</span><span aria-hidden="true">✦</span>
+        <span aria-hidden="true">Deja de pagar por candidatos que ya tienes</span><span aria-hidden="true">✦</span>
+        <span aria-hidden="true">Fácil desde el primer día</span><span aria-hidden="true">✦</span>
+        <span aria-hidden="true">No descarta a nadie</span><span aria-hidden="true">✦</span>
+        <span aria-hidden="true">Busca como hablas</span><span aria-hidden="true">✦</span>
+        <span aria-hidden="true">Filtra hasta dar con quien buscas</span><span aria-hidden="true">✦</span>
+        <span aria-hidden="true">Detrás de cada CV hay una persona</span><span aria-hidden="true">✦</span>
+        <span aria-hidden="true">Todo tu equipo, cada uno con su acceso</span><span aria-hidden="true">✦</span>
+        <span aria-hidden="true">Tú decides, siempre</span><span aria-hidden="true">✦</span>
+      </div>
+    </section>
+
+    <!-- STATEMENT -->
+    <section class="statement" data-section="statement">
+      <p class="big-text" id="bigText">
+        Abres una vacante y empiezas de cero: anuncios, entrevistas, semanas buscando. Y mientras,
+        la persona que necesitas ya te envió su CV hace meses. <span class="grad">Solo tienes que encontrarla.</span>
+      </p>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="como-funciona" data-section="como-funciona">
+      <div class="section-head reveal">
+        <span class="eyebrow">Cómo funciona</span>
+        <h2>Así de <em>fácil</em>.</h2>
+        <p>Sin instalar nada, sin configuraciones y sin manuales. Entras desde el navegador y empiezas.</p>
+      </div>
+
+      <div class="pipeline" id="pipeline">
+        <div class="pipe-line"><i id="pipeFill"></i></div>
+        <div class="step reveal">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z" /><path d="M14 3v5h5" /><path d="M10 13h6M10 17h4" /></svg>
+          </div>
+          <span class="step-n">01</span>
+          <h3>Sube los CVs</h3>
+          <p>De uno en uno o todos juntos.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="M20 20l-4-4M8 11h6M11 8v6" /></svg>
+          </div>
+          <span class="step-n">02</span>
+          <h3>Busca lo que quieres</h3>
+          <p>Escríbelo con tus palabras o usa filtros: experiencia, idiomas, ubicación, empresas anteriores…</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" /></svg>
+          </div>
+          <span class="step-n">03</span>
+          <h3>Revisa los perfiles</h3>
+          <p>Te aparecen los perfiles que cumplen las condiciones que has puesto. Los revisas y decides tú: Talentra no descarta ni elige a nadie.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES BENTO -->
+    <section class="section" id="funciones" data-section="funciones">
+      <div class="section-head reveal">
+        <span class="eyebrow">Funciones</span>
+        <h2>No es otro ATS. Es la <em>memoria</em> de tu equipo de selección.</h2>
+        <p>No publica ofertas ni decide por ti. Encuentra, te enseña las pruebas y deja que tú seas quien tome la decisión.</p>
+      </div>
+
+      <div class="bento">
+        <article class="card c-wide spot reveal">
+          <div class="card-copy">
+            <span class="eyebrow">Filtros al detalle</span>
+            <h3>Filtra hasta dar con quien buscas.</h3>
+            <p>Experiencia, idiomas, ubicación, empresas en las que ha trabajado, herramientas que domina… Combina lo que necesites. Y recuerda: filtrar no es descartar. Nadie desaparece, solo ves primero a quien encaja.</p>
+          </div>
+          <div class="filter-builder" aria-label="Ejemplo de búsqueda con filtros">
+            <div class="fb-row"><span class="fb-key">Tecnología</span><span class="fb-val">Salesforce</span><span class="fb-op">y</span><span class="fb-val">HubSpot</span></div>
+            <div class="fb-row"><span class="fb-key">Años en Salesforce</span><span class="fb-val">3 o más</span></div>
+            <div class="fb-row"><span class="fb-key">Empresa anterior</span><span class="fb-val">Telefónica</span><span class="fb-op">o</span><span class="fb-val">Vodafone</span></div>
+            <div class="fb-row"><span class="fb-key">Idioma</span><span class="fb-val">Inglés C1 o más</span></div>
+            <div class="fb-row"><span class="fb-key">Ubicación</span><span class="fb-val">Madrid</span><span class="fb-op">o</span><span class="fb-val">Remoto</span></div>
+            <div class="fb-result"><b>14 personas</b><span>encajan con lo que buscas</span></div>
+          </div>
+        </article>
+
+        <article class="card c-sem spot reveal">
+          <span class="eyebrow">Busca como hablas</span>
+          <h3>“Alguien que haya abierto mercado en Latinoamérica.”</h3>
+          <p>¿No sabes qué filtros poner? Escríbelo como se lo dirías a un compañero. Talentra lo encuentra aunque el CV lo diga de otra forma.</p>
+          <div class="sem-orbs"><i></i><i></i><i></i><i></i><i></i></div>
+        </article>
+
+        <article class="card c-wide c-row spot reveal">
+          <div class="card-copy">
+            <span class="eyebrow">Pruebas en cada dato</span>
+            <h3>Cada habilidad viene con la frase que la demuestra.</h3>
+            <p>Nada de etiquetas inventadas. Detrás de cada habilidad ves lo que la persona escribió en su CV. Y si algo no está claro, te avisa para que lo mires tú.</p>
+          </div>
+          <div class="evidence-demo">
+            <div class="ev-row"><b>Liderazgo de equipos</b><span>6 años</span><div class="ev-bar"><i style="--w:86%"></i></div></div>
+            <blockquote>“Dirigí un equipo de 12 personas en la apertura de tres nuevas tiendas…”</blockquote>
+            <div class="ev-row"><b>Negociación</b><span>4 años</span><div class="ev-bar"><i style="--w:58%"></i></div></div>
+            <blockquote>“Cerré acuerdos con proveedores que redujeron costes un 15%…”</blockquote>
+          </div>
+        </article>
+
+        <article class="card c-wide c-row c-team spot reveal">
+          <div class="card-copy">
+            <span class="eyebrow">Organizaciones y permisos</span>
+            <h3>Tu empresa, tu equipo, tus reglas.</h3>
+            <p>Crea tu organización, invita a tu equipo y define perfiles con distintos permisos: quién lo gestiona todo, quién sube CVs y busca, y quién solo consulta. Cada uno ve exactamente lo que le toca.</p>
+          </div>
+          <div class="team-demo" aria-label="Ejemplo de organización con perfiles y permisos">
+            <div class="td-org"><span class="td-logo">A</span><div><b>Acme Retail</b><small>Organización · 3 perfiles</small></div></div>
+            <div class="td-row"><span class="td-av" style="--h:330">MG</span><b>María G.</b><span class="td-role">Administración</span><small>Gestiona miembros y permisos</small></div>
+            <div class="td-row"><span class="td-av" style="--h:265">JP</span><b>Javier P.</b><span class="td-role">Selección</span><small>Sube CVs, busca y crea listas</small></div>
+            <div class="td-row"><span class="td-av" style="--h:160">LS</span><b>Lucía S.</b><span class="td-role td-ro">Consulta</span><small>Solo ve perfiles</small></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PRIVACY -->
+    <section class="section privacy" id="personas" data-section="personas">
+      <div class="privacy-grid">
+        <div class="reveal">
+          <span class="eyebrow">Personas, no solo datos</span>
+          <h2>Detrás de cada CV<br />hay <em>una persona.</em></h2>
+          <p class="lead">Por eso Talentra <strong>ni descarta ni elige a nadie</strong>. No puntúa, no hace rankings, no decide. Solo te ayuda a encontrar a las personas que encajan con lo que buscas, para que <strong>tú las conozcas y decidas</strong>.</p>
+          <ul class="checks">
+            <li>No descarta a nadie</li>
+            <li>No elige ni puntúa a nadie</li>
+            <li>Filtrar no es descartar: todo el mundo sigue ahí</li>
+            <li>La decisión es siempre de una persona</li>
+          </ul>
+          <p class="privacy-note">Y como cada CV es la historia de alguien, lo cuidamos como tal: cada organización tiene su espacio privado y cada persona de tu equipo ve solo lo que le toca.</p>
+        </div>
+        <div class="person reveal" aria-label="Ejemplo de perfil en Talentra">
+          <div class="p-head">
+            <img class="p-photo" src="img/laura-martin.jpg" alt="Foto de Laura Martín" width="64" height="64" loading="lazy" />
+            <div><strong>Laura Martín</strong><small>Key Account Manager · Madrid</small></div>
+          </div>
+          <span class="p-label">En sus palabras</span>
+          <blockquote>“Lo que más me gusta de mi trabajo es construir relaciones de confianza con los clientes, de las que duran años.”</blockquote>
+          <div class="tags"><i>Ex-Amazon</i><i>7 años en ventas</i><i>Ha liderado equipos</i><i>Inglés C1</i></div>
+          <div class="p-note"><span aria-hidden="true">✓</span><p>Nadie la ha puntuado ni descartado. <b>La decisión es tuya.</b></p></div>
+          <div class="p-actions"><span class="see">Ver su CV</span><span class="p-contact">Contactar</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="empezar" data-section="cta">
+      <div class="cta-inner reveal">
+        <h2>Deja de buscar fuera<br /><span class="grad">lo que ya tienes dentro.</span></h2>
+        <p class="cta-sub">Abrimos acceso limitado. Apúntate y te avisamos en cuanto haya plaza para tu equipo. Es gratis y no te compromete a nada.</p>
+        <div class="cta-actions">
+          <a class="btn" href="#lista-espera" data-waitlist data-track="cta">Quiero acceso anticipado <span class="arrow">→</span></a>
+        </div>
+        <p class="cta-legal">Al apuntarte aceptas los <a href="terminos.html">términos y condiciones</a>. Trataremos tus datos solo para avisarte del acceso, según nuestra <a href="privacidad.html">política de privacidad</a>.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contacto" data-section="contacto">
+      <div class="contact-card reveal">
+        <div>
+          <span class="eyebrow">Contacto</span>
+          <h2>¿Hablamos?</h2>
+          <p>¿Tienes dudas o quieres saber si Talentra encaja con tu equipo? Escríbenos y te responde una persona, no un robot.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="btn" href="mailto:hola@talentra.example">Escríbenos <span class="arrow">→</span></a>
+          <a class="contact-mail" href="mailto:hola@talentra.example">hola@talentra.example</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-section="footer">
+    <a class="brand" href="#top"><img src="logo.png" alt="" width="34" height="34" />Talentra</a>
+    <p>Búsqueda y revisión humana. Talentra no debe usarse para descartes ni decisiones automatizadas de empleo.</p>
+    <nav class="footer-links" aria-label="Legal">
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a href="terminos.html">Términos</a>
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="mailto:hola@talentra.example">Contacto</a>
+    </nav>
+    <small>© <span id="year"></span> Talentra</small>
+  </footer>
+
+  <!-- WAITLIST FORM -->
+  <dialog class="wl" id="waitlist" aria-labelledby="wlTitle" data-section="waitlist-form">
+    <div class="wl-inner">
+      <button class="wl-close" type="button" aria-label="Cerrar" data-close>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+
+      <div class="wl-step" id="wlFormStep">
+        <span class="eyebrow">Acceso anticipado</span>
+        <h2 id="wlTitle">Entra <em>antes que nadie.</em></h2>
+        <p class="wl-sub">Abrimos acceso limitado. Déjanos tus datos y te avisamos en cuanto haya plaza para tu equipo. Gratis y sin compromiso.</p>
+
+        <form id="wlForm" novalidate>
+          <div class="wl-grid">
+            <div class="wl-field">
+              <label for="wlNombre">Nombre</label>
+              <input id="wlNombre" name="nombre" type="text" autocomplete="name" required />
+              <small class="wl-msg" id="wlNombreMsg"></small>
+            </div>
+            <div class="wl-field">
+              <label for="wlEmailInput">Email de trabajo</label>
+              <input id="wlEmailInput" name="email" type="email" autocomplete="email" inputmode="email" required />
+              <small class="wl-msg" id="wlEmailInputMsg"></small>
+            </div>
+            <div class="wl-field">
+              <label for="wlEmpresa">Empresa</label>
+              <input id="wlEmpresa" name="empresa" type="text" autocomplete="organization" required />
+              <small class="wl-msg" id="wlEmpresaMsg"></small>
+            </div>
+            <div class="wl-field">
+              <label for="wlCargo">Cargo <span class="wl-opt">(opcional)</span></label>
+              <input id="wlCargo" name="cargo" type="text" autocomplete="organization-title" />
+            </div>
+          </div>
+
+          <fieldset class="wl-field wl-volume">
+            <legend>¿Cuántos CVs tenéis guardados, más o menos? <span class="wl-opt">(opcional)</span></legend>
+            <div class="wl-chips">
+              <label><input type="radio" name="volumen" value="menos-100" /><span>Menos de 100</span></label>
+              <label><input type="radio" name="volumen" value="100-1000" /><span>100 – 1.000</span></label>
+              <label><input type="radio" name="volumen" value="1000-10000" /><span>1.000 – 10.000</span></label>
+              <label><input type="radio" name="volumen" value="mas-10000" /><span>Más de 10.000</span></label>
+            </div>
+          </fieldset>
+
+          <!-- Anti-spam: real people never see or fill this field -->
+          <div class="wl-hp" aria-hidden="true">
+            <label>Web <input name="web" type="text" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <div class="wl-field wl-consent">
+            <label class="wl-check">
+              <input id="wlConsent" name="consentimiento" type="checkbox" value="si" required />
+              <span>He leído la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y acepto que Talentra trate mis datos para gestionar mi acceso anticipado.</span>
+            </label>
+            <small class="wl-msg" id="wlConsentMsg"></small>
+          </div>
+
+          <p class="wl-error" id="wlError" role="alert" hidden>
+            No hemos podido enviarlo. Inténtalo de nuevo en un momento o escríbenos a <a href="mailto:hola@talentra.example">hola@talentra.example</a>.
+          </p>
+
+          <button class="btn wl-submit" type="submit">
+            <span class="wl-label">Quiero acceso anticipado</span><span class="arrow">→</span>
+          </button>
+          <p class="wl-fine">Sin spam. Solo te escribiremos sobre tu acceso a Talentra.</p>
+        </form>
+      </div>
+
+      <div class="wl-step wl-done" id="wlDoneStep" hidden>
+        <div class="wl-done-icon" aria-hidden="true">✓</div>
+        <h2 tabindex="-1" id="wlDoneTitle">¡Estás <em>dentro!</em></h2>
+        <p class="wl-sub">Te hemos apuntado a la lista de espera. Te escribiremos a <b id="wlDoneEmail"></b> en cuanto haya plaza para tu equipo.</p>
+        <div class="wl-done-actions">
+          <button class="btn" type="button" data-close>Perfecto</button>
+          <button class="btn btn-ghost" type="button" id="wlAnother">Apuntar a otra persona</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <script src="analytics.js"></script>
+  <script src="script.js"></script>
+  <script src="waitlist.js"></script>
+</body>
+</html>
