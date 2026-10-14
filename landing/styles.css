@@ -38,7 +38,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 ::selection { background: var(--pink); color: #fff; }
 
 /* ---------- Background layers ---------- */
-#constellation { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+#constellation { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100lvh; z-index: 0; pointer-events: none; }
 .aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .aurora i {
   position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.35;
@@ -222,7 +222,6 @@ main, .nav, .footer { position: relative; z-index: 2; }
 .see { flex: 0 0 auto; font-size: 12px; font-weight: 600; padding: 6px 11px; border-radius: 999px; color: #ffb3c8; background: rgba(255, 84, 135, 0.1); border: 1px solid rgba(255, 84, 135, 0.3); }
 :root[data-theme="light"] .see { color: #c8315f; background: rgba(255, 84, 135, 0.07); }
 .privacy .lead strong { color: var(--text); font-weight: 700; }
-.privacy-note { margin: 28px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14.5px; color: var(--dim); max-width: 560px; }
 
 .float-card {
   position: absolute; z-index: 3; border-radius: 16px; padding: 14px 16px;
@@ -683,14 +682,6 @@ html:has(.lg[open]) { overflow: hidden; }
 .lg-body.legal .legal-date { margin-top: -6px; }
 .lg-body.legal h2 { margin-top: 28px; }
 .lg-body:focus { outline: none; }
-.lg.is-contact { width: min(560px, calc(100% - 32px)); }
-.lg.is-contact .lg-head { position: absolute; top: 0; right: 0; padding: 16px; border: 0; }
-.lg.is-contact .lg-body.legal { padding-top: 34px; }
-.lg-mail { font-size: 18px; margin: 18px 0 0; }
-.lg-mail a { color: var(--text) !important; }
-.lg-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
-.lg-actions .btn { text-decoration: none !important; color: #fff !important; border: 0; cursor: pointer; font-family: inherit; }
-.lg-actions .btn-ghost { color: var(--text) !important; border: 1px solid var(--line); }
 @media (max-width: 560px) {
   .lg { width: calc(100% - 20px); max-height: 86dvh; }
   .lg-head { padding: 14px 14px 12px 18px; }
@@ -717,3 +708,65 @@ html:has(.lg[open]) { overflow: hidden; }
 }
 :root[data-theme="light"] .faq-item { background: #fff; }
 :root[data-theme="light"] .faq-item[open] { background: #fff; }
+
+/* ---------- Trust: data & compliance (inside the privacy section) ---------- */
+.trust { margin-top: 96px; }
+.trust-title { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.2; letter-spacing: -0.03em; font-weight: 700; max-width: 760px; margin: 0 0 32px; }
+.trust-title em { color: #ffc2d3; }
+.trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.trust-grid .card:nth-child(2) { --d: 0.08s; } .trust-grid .card:nth-child(3) { --d: 0.16s; }
+.trust-icon {
+  width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center;
+  background: linear-gradient(160deg, #1a2342, #10162c); border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 32px -18px rgba(255, 84, 135, 0.6); margin-bottom: 8px;
+}
+.trust-icon svg { width: 24px; height: 24px; fill: none; stroke: #ff8fae; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.trust-card h3 { font-size: 19px; }
+@media (max-width: 900px) { .trust-grid { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .trust { margin-top: 64px; } }
+:root[data-theme="light"] .trust-title em { color: #e0467a; }
+:root[data-theme="light"] .trust-icon { background: linear-gradient(160deg, #ffffff, #f6f3fa); border-color: rgba(20, 26, 46, 0.08); box-shadow: 0 16px 32px -20px rgba(255, 84, 135, 0.6); }
+:root[data-theme="light"] .trust-icon svg { stroke: #e8457a; }
+
+/* ---------- About ---------- */
+.about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center; }
+.about h2 { font-size: clamp(34px, 4.4vw, 58px); line-height: 1.05; letter-spacing: -0.04em; font-weight: 800; margin: 14px 0 18px; }
+.about h2 em { color: #ffc2d3; }
+.about .lead { margin: 0 0 16px; }
+.about p:not(.lead) { color: var(--muted); font-size: 16.5px; max-width: 600px; margin: 0; }
+.founders { display: grid; gap: 14px; --d: 0.15s; }
+.founder {
+  display: flex; align-items: center; gap: 16px; padding: 20px 22px; border-radius: 20px;
+  border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+}
+.founder-av {
+  width: 56px; height: 56px; flex: 0 0 auto; border-radius: 16px; display: grid; place-items: center;
+  font-size: 22px; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, hsl(var(--h) 80% 62%), hsl(calc(var(--h) + 30) 80% 55%));
+}
+.founder strong { display: block; font-size: 19px; }
+.founder small { display: block; margin-top: 2px; line-height: 1.4; color: var(--muted); font-size: 13.5px; }
+@media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+:root[data-theme="light"] .about h2 em { color: #e0467a; }
+:root[data-theme="light"] .founder { background: #fff; border-color: rgba(20, 26, 46, 0.1); box-shadow: 0 20px 50px -30px rgba(40, 30, 80, 0.2); }
+
+/* ---------- Touch screens ---------- */
+/* A tap leaves :hover stuck on the element: no lifts or glows there */
+@media (hover: none) {
+  .card:hover, .btn:hover, .pill-hot:hover, .theme-toggle:hover { transform: none; }
+  .btn:hover .arrow, .pill-hot:hover .arrow { transform: none; }
+  .spot:hover::before { opacity: 0; }
+}
+/* Blur on many elements at once stutters on phones: a shorter, blur-free reveal */
+@media (max-width: 720px) {
+  .js .reveal { filter: none; transform: translateY(20px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .js .reveal.in { transform: none; }
+}
+@media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+  .js .reveal { transform: none; }
+}
+
+/* ---------- Waitlist fallback (only when the form can't open) ---------- */
+.wl-fallback { margin: 22px auto 0; max-width: 520px; font-size: 14.5px; color: var(--muted); }
+.wl-fallback a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+.wl-ready .wl-fallback { display: none; }

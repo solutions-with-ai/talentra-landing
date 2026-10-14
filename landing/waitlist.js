@@ -11,12 +11,15 @@
  *
  * Cualquier enlace a #lista-espera abre el formulario, también al llegar a la web con esa URL
  * (p. ej. https://…/#lista-espera en una campaña o un post).
+ * Si el formulario no puede abrirse (JS bloqueado o con error, navegador muy antiguo), #lista-espera lleva
+ * a la sección del CTA, que muestra el email para apuntarse a mano.
  */
 (() => {
   const WAITLIST_ENDPOINT = "";
 
   const dlg = document.getElementById("waitlist");
   if (!dlg || typeof dlg.showModal !== "function") return;
+  document.documentElement.classList.add("wl-ready"); // hides the email fallback under the CTA
 
   const form = dlg.querySelector("#wlForm");
   const formStep = dlg.querySelector("#wlFormStep");

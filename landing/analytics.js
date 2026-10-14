@@ -19,12 +19,12 @@
  *   Engaged time     · tiempo con la pestaña visible, al salir       · props: bucket
  *   Theme toggle     · cambia el tema                                · props: to
  *   Menu open        · abre el menú del móvil
- *   Legal open       · abre un documento legal o el contacto en la ventana emergente · props: doc (desde legal-popup.js)
+ *   Legal open       · abre un documento legal en la ventana emergente · props: doc (desde legal-popup.js)
  */
 (() => {
   const ANALYTICS = {
     provider: "plausible", // "plausible" | "umami"
-    domain: "", // PENDIENTE: p. ej. "talentra.es" (Plausible) — o el website-id si usas Umami
+    domain: "solutions-with-ai.github.io", // El mismo dominio con el que se da de alta el sitio en Plausible (o el website-id si usas Umami)
     src: "https://plausible.io/js/script.js", // Umami: "https://cloud.umami.is/script.js"
   };
 
