@@ -1,5 +1,5 @@
 /*
- * Abre los documentos legales (privacidad, cookies, términos, aviso legal) y el contacto en una ventana
+ * Abre los documentos legales (privacidad, cookies, términos, aviso legal) en una ventana
  * emergente en lugar de navegar a otra página. Las páginas siguen existiendo por separado para enlaces
  * directos y buscadores; si algo falla al cargarlas, el enlace navega como siempre.
  */
@@ -29,8 +29,7 @@
     return cache.get(doc).cloneNode(true);
   };
 
-  const show = (isContact) => {
-    dlg.classList.toggle("is-contact", isContact);
+  const show = () => {
     if (!dlg.open) dlg.showModal();
     body.scrollTop = 0;
     body.focus({ preventScroll: true }); // keep the focus ring off the first tab when opening
@@ -44,23 +43,14 @@
     nav?.remove();
     main.querySelector("h1")?.setAttribute("id", "lgTitle");
     body.replaceChildren(...main.childNodes);
-    show(false);
+    show();
     track("Legal open", { doc: doc.replace(".html", "") });
   };
 
-  const openContact = () => {
-    tabs.replaceChildren();
-    tabs.hidden = true;
-    body.replaceChildren(document.getElementById("contactPopup").content.cloneNode(true));
-    show(true);
-    track("Legal open", { doc: "contacto" });
-  };
-
-  // Any link to a legal page (footer, CTA, waitlist form, links inside the documents themselves)
+  // Any link to a legal page (footer, waitlist form, links inside the documents themselves)
   document.addEventListener("click", async (e) => {
-    const a = e.target.closest("a[href], [data-popup]");
+    const a = e.target.closest("a[href]");
     if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;
-    if (a.dataset.popup === "contact") { e.preventDefault(); openContact(); return; }
     const doc = docOf(a);
     if (!doc) return;
     e.preventDefault();
@@ -69,13 +59,4 @@
 
   dlg.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => dlg.close()));
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
-
-  // "Copiar email"
-  dlg.addEventListener("click", async (e) => {
-    const b = e.target.closest("[data-copy]");
-    if (!b) return;
-    try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "¡Copiado!"; }
-    catch { b.textContent = b.dataset.copy; }
-    setTimeout(() => (b.textContent = "Copiar email"), 2000);
-  });
 })();

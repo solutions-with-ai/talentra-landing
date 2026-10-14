@@ -11,6 +11,13 @@ Estado: acceso anticipado con lista de espera (gratis y sin compromiso). Idioma:
 - Búsqueda con filtros combinables: experiencia, idiomas, ubicación, empresas anteriores, herramientas.
 - Búsqueda escribiendo con tus palabras (por ejemplo, «alguien que haya abierto mercado en Latinoamérica»), aunque el CV lo exprese de otra forma.
 - Organizaciones con perfiles de distintos permisos para todo el equipo.
+- Lee CVs en PDF (sueltos o en un ZIP), en español, inglés y otros idiomas habituales.
+
+## Privacidad y cumplimiento
+
+- Los CVs se guardan en servidores de la Unión Europea y se tratan conforme al RGPD.
+- Pensado para el Reglamento Europeo de IA (AI Act), que considera de alto riesgo la IA usada en selección de personal: supervisión humana, sin decisiones automatizadas y con la frase del CV que respalda cada dato.
+- Cada organización tiene su propio espacio privado.
 
 ## Qué no hace
 
@@ -21,6 +28,10 @@ Estado: acceso anticipado con lista de espera (gratis y sin compromiso). Idioma:
 ## Para quién
 
 Equipos de selección, recruiters y departamentos de recursos humanos que acumulan cientos o miles de CVs y quieren volver a encontrar a candidatos que ya les enviaron su currículum.
+
+## Quiénes somos
+
+Talentra la hacen Jimena (3 años de experiencia en diseño de soluciones) e Ismael (10 años de experiencia en diseño de soluciones).
 
 ## Enlaces
 

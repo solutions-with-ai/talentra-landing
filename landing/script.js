@@ -52,12 +52,13 @@
   const mouse = { x: -9999, y: -9999 };
 
   function resize() {
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
-    W = canvas.width = innerWidth * DPR;
-    H = canvas.height = innerHeight * DPR;
-    // On mobile, scrolling shows/hides the address bar and changes only the height: keep the points
-    if (innerWidth === lastW && pts.length) { if (reduced) drawFrame(); return; }
+    // On mobile, scrolling shows/hides the address bar and changes only the height. The canvas is sized
+    // to the largest viewport (CSS 100lvh), so ignore those resizes instead of clearing and stretching it
+    if (innerWidth === lastW && pts.length) return;
     lastW = innerWidth;
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.width = canvas.clientWidth * DPR;
+    H = canvas.height = canvas.clientHeight * DPR;
     const n = Math.round(Math.min(90, (innerWidth * innerHeight) / 16000));
     pts = Array.from({ length: n }, () => ({
       x: Math.random() * W,
@@ -67,10 +68,12 @@
       r: (Math.random() * 1.4 + 0.6) * DPR,
       hot: Math.random() < 0.12,
     }));
+    if (reduced) drawFrame();
   }
   function drawFrame() {
     ctx.clearRect(0, 0, W, H);
     const link = 130 * DPR;
+    const light = isLight();
     for (let i = 0; i < pts.length; i++) {
       const p = pts[i];
       p.x += p.vx; p.y += p.vy;
@@ -86,20 +89,19 @@
         const d = Math.hypot(p.x - q.x, p.y - q.y);
         if (d < link) {
           const a = (1 - d / link) * 0.35;
-          const light = isLight();
           ctx.strokeStyle = p.hot || q.hot ? `rgba(255,84,135,${a})` : light ? `rgba(60,70,110,${a * 0.45})` : `rgba(160,170,210,${a * 0.6})`;
           ctx.lineWidth = DPR * 0.7;
           ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
         }
       }
-      ctx.fillStyle = p.hot ? "rgba(255,100,140,.9)" : isLight() ? "rgba(60,70,110,.35)" : "rgba(200,210,240,.55)";
+      ctx.fillStyle = p.hot ? "rgba(255,100,140,.9)" : light ? "rgba(60,70,110,.35)" : "rgba(200,210,240,.55)";
       ctx.beginPath(); ctx.arc(p.x, p.y, p.hot ? p.r * 1.6 : p.r, 0, Math.PI * 2); ctx.fill();
     }
   }
   function draw() { drawFrame(); requestAnimationFrame(draw); }
   resize();
   window.addEventListener("resize", resize);
-  if (!reduced) draw(); else drawFrame();
+  if (!reduced) draw();
 
   /* ---------- Cursor glow + spotlight cards ---------- */
   const glow = $("#cursorGlow");
@@ -183,7 +185,10 @@
   const typed = $("#typed");
   const chipBox = $("#chips");
   const results = $$(".result");
-  const render = ({ chips, results: rows }) => {
+  let current = queries[0];
+  const render = (item) => {
+    current = item;
+    const { chips, results: rows } = item;
     chipBox.replaceChildren(...chips.map((t) => Object.assign(document.createElement("span"), { className: "chip", textContent: t })));
     rows.forEach(([ini, hue, name, meta, tags], i) => {
       const el = results[i], av = $(".avatar", el);
@@ -194,6 +199,31 @@
     });
   };
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  // Each query wraps to a different height (on mobile the long ones take two lines): measure them all
+  // and reserve the tallest, so the hero keeps its size and the page below doesn't jump while it loops
+  const searchBox = $(".mock-search"), resultBox = $("#results");
+  let reservedW = 0;
+  const reserveDemoSpace = () => {
+    if (innerWidth === reservedW) return;
+    reservedW = innerWidth;
+    const boxes = [searchBox, chipBox, resultBox];
+    const shown = typed.textContent, shownItem = current;
+    boxes.forEach((el) => (el.style.minHeight = ""));
+    const max = boxes.map(() => 0);
+    for (const item of queries) {
+      render(item);
+      typed.textContent = item.q;
+      boxes.forEach((el, i) => (max[i] = Math.max(max[i], Math.ceil(el.getBoundingClientRect().height))));
+    }
+    boxes.forEach((el, i) => (el.style.minHeight = max[i] + "px"));
+    render(shownItem);
+    typed.textContent = shown;
+  };
+
+  reserveDemoSpace();
+  window.addEventListener("resize", reserveDemoSpace);
+  document.fonts?.ready.then(() => { reservedW = 0; reserveDemoSpace(); });
 
   async function demo() {
     if (reduced) { typed.textContent = queries[0].q; return; }
@@ -238,8 +268,10 @@
   /* ---------- Pipeline progress ---------- */
   const pipe = $("#pipeline"), fill = $("#pipeFill"), steps = $$(".step", pipe);
 
+  let vh = innerHeight, vhW = innerWidth;
+  window.addEventListener("resize", () => { if (innerWidth !== vhW) { vhW = innerWidth; vh = innerHeight; } });
+
   function onScrollFx() {
-    const vh = innerHeight;
     const br = big.getBoundingClientRect();
     const p = Math.min(1, Math.max(0, (vh * 0.85 - br.top) / (br.height + vh * 0.35)));
     const lit = Math.floor(p * words.length);

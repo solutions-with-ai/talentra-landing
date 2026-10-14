@@ -12,16 +12,16 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:site_name" content="Talentra" />
   <meta property="og:url" content="https://solutions-with-ai.github.io/talentra-landing/" />
-  <meta property="og:title" content="Talentra · Tu próximo fichaje ya te mandó su CV" />
+  <meta property="og:title" content="Talentra · Tu próximo fichaje ya te ha mandado su CV" />
   <meta property="og:description" content="Analiza los currículums de tu empresa y encuentra a quien encaja. Sin descartes automáticos: decides tú." />
-  <meta property="og:image" content="https://solutions-with-ai.github.io/talentra-landing/og-image.jpg" />
+  <meta property="og:image" content="https://solutions-with-ai.github.io/talentra-landing/og-image.jpg?v=2" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Talentra: tu próximo fichaje ya te mandó su CV" />
+  <meta property="og:image:alt" content="Talentra: tu próximo fichaje ya te ha mandado su CV" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Talentra · Tu próximo fichaje ya te mandó su CV" />
+  <meta name="twitter:title" content="Talentra · Tu próximo fichaje ya te ha mandado su CV" />
   <meta name="twitter:description" content="Analiza los currículums de tu empresa y encuentra a quien encaja. Sin descartes automáticos: decides tú." />
-  <meta name="twitter:image" content="https://solutions-with-ai.github.io/talentra-landing/og-image.jpg" />
+  <meta name="twitter:image" content="https://solutions-with-ai.github.io/talentra-landing/og-image.jpg?v=2" />
   <link rel="alternate" hreflang="es" href="https://solutions-with-ai.github.io/talentra-landing/" />
   <link rel="alternate" hreflang="x-default" href="https://solutions-with-ai.github.io/talentra-landing/" />
   <meta name="theme-color" content="#0b1020" />
@@ -39,7 +39,11 @@
         "name": "Talentra",
         "url": "https://solutions-with-ai.github.io/talentra-landing/",
         "logo": "https://solutions-with-ai.github.io/talentra-landing/logo.png",
-        "email": "hola@talentra.example"
+        "email": "hola@talentra.example",
+        "founder": [
+          { "@type": "Person", "name": "Jimena", "description": "3 años de experiencia en diseño de soluciones" },
+          { "@type": "Person", "name": "Ismael", "description": "10 años de experiencia en diseño de soluciones" }
+        ]
       },
       {
         "@type": "WebSite",
@@ -97,10 +101,34 @@
           },
           {
             "@type": "Question",
+            "name": "¿En qué idiomas puede estar el CV?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Talentra lee currículums en español, en inglés y en otros idiomas habituales, así que puedes tener en el mismo sitio los CVs de candidatos de distintos países."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "¿Talentra descarta o puntúa a los candidatos?",
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "No. Talentra analiza los currículums para que encuentres a las personas, pero ni descarta ni elige a nadie: no puntúa, no hace rankings y no decide. La decisión es siempre tuya."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Dónde se guardan los CVs y quién puede verlos?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "En servidores de la Unión Europea, y se tratan conforme al RGPD. Cada organización tiene su propio espacio privado: solo pueden verlos las personas de tu equipo a las que tú des acceso, y nunca se comparten con otras empresas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo encaja Talentra con el AI Act?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "El Reglamento Europeo de Inteligencia Artificial (AI Act) considera de alto riesgo la IA que se usa en selección de personal y exige que haya supervisión humana. Talentra está pensada desde el principio con ese criterio: no toma decisiones automatizadas, no puntúa ni hace rankings, cada dato muestra la frase del CV que lo respalda y la decisión es siempre de una persona."
             }
           },
           {
@@ -116,7 +144,23 @@
             "name": "¿Hay que instalar algo para analizar los CVs?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. Talentra funciona desde el navegador: subes los currículums de uno en uno o todos juntos y empiezas a buscar, sin instalaciones ni configuraciones."
+              "text": "No. Talentra funciona desde el navegador: subes los currículums en PDF, de uno en uno o todos juntos en un ZIP, y empiezas a buscar, sin instalaciones ni configuraciones."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué formatos de CV acepta?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Currículums en PDF, de uno en uno o varios a la vez. Si tienes muchos, puedes subir un archivo ZIP con todos los PDF dentro y Talentra los procesa de una vez."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuántos CVs puedo subir?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Todos los que tenga tu empresa, desde unas decenas hasta miles. Puedes subir todo tu archivo de una vez en un ZIP y seguir añadiendo los nuevos según lleguen."
             }
           },
           {
@@ -143,8 +187,8 @@
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="apple-touch-icon" href="logo.png" />
   <link rel="preload" href="fonts/red-hat-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="fonts.css?v=17" />
-  <link rel="stylesheet" href="styles.css?v=17" />
+  <link rel="stylesheet" href="fonts.css?v=20" />
+  <link rel="stylesheet" href="styles.css?v=20" />
 </head>
 <body>
   <canvas id="constellation" aria-hidden="true"></canvas>
@@ -157,9 +201,9 @@
     <nav class="nav-links" id="navLinks" aria-label="Principal">
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#funciones">Funciones</a>
-      <a href="#personas">Personas</a>
+      <a href="#privacidad">Privacidad</a>
       <a href="#preguntas">FAQ</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#nosotros">Nosotros</a>
     </nav>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar a modo claro">
@@ -180,7 +224,7 @@
         <a class="pill pill-hot reveal" href="#lista-espera" data-waitlist data-track="hero-pill"><span class="dot"></span><b>Acceso anticipado</b><span class="arrow">→</span></a>
         <h1 class="reveal">
           Tu próximo fichaje<br />
-          <span class="grad">ya te mandó su CV.</span><br />
+          <span class="grad">ya te ha mandado su CV.</span><br />
           <em>Solo tienes que encontrarlo.</em>
         </h1>
         <p class="lead reveal">
@@ -300,7 +344,7 @@
           </div>
           <span class="step-n">01</span>
           <h3>Sube los CVs</h3>
-          <p>De uno en uno o todos juntos.</p>
+          <p>En PDF, de uno en uno o todos juntos en un ZIP.</p>
         </div>
         <div class="step reveal">
           <div class="step-icon">
@@ -390,11 +434,11 @@
       </div>
     </section>
 
-    <!-- PRIVACY -->
-    <section class="section privacy" id="personas" data-section="personas">
+    <!-- PEOPLE & PRIVACY -->
+    <section class="section privacy" id="privacidad" data-section="privacidad">
       <div class="privacy-grid">
         <div class="reveal">
-          <span class="eyebrow">Personas, no solo datos</span>
+          <span class="eyebrow">Personas y privacidad</span>
           <h2>Detrás de cada CV<br />hay <em>una persona.</em></h2>
           <p class="lead">Por eso Talentra <strong>ni descarta ni elige a nadie</strong>. No puntúa, no hace rankings, no decide. Solo te ayuda a encontrar a las personas que encajan con lo que buscas, para que <strong>tú las conozcas y decidas</strong>.</p>
           <ul class="checks">
@@ -403,7 +447,6 @@
             <li>Filtrar no es descartar: todo el mundo sigue ahí</li>
             <li>La decisión es siempre tuya</li>
           </ul>
-          <p class="privacy-note">Y como cada CV es la historia de alguien, lo cuidamos como tal: cada organización tiene su espacio privado y cada persona de tu equipo ve solo lo que le toca.</p>
         </div>
         <div class="person reveal" aria-label="Ejemplo de perfil en Talentra">
           <div class="p-head">
@@ -415,6 +458,33 @@
           <div class="tags"><i>Ex-Amazon</i><i>7 años en ventas</i><i>Ha liderado equipos</i><i>Inglés C1</i></div>
           <div class="p-note"><span aria-hidden="true">✓</span><p>Nadie la ha puntuado ni descartado. <b>La decisión es tuya.</b></p></div>
           <div class="p-actions"><span class="see">Ver su CV</span><span class="p-contact">Contactar</span></div>
+        </div>
+      </div>
+
+      <div class="trust">
+        <h3 class="trust-title reveal">Y como cada CV es la historia de alguien, <em>lo cuidamos como tal.</em></h3>
+        <div class="trust-grid">
+          <article class="card trust-card reveal">
+            <div class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z" /></svg>
+            </div>
+            <h3>Datos alojados en Europa</h3>
+            <p>Los currículums se guardan en servidores de la Unión Europea y se tratan conforme al RGPD.</p>
+          </article>
+          <article class="card trust-card reveal">
+            <div class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-3 8.4-7 10-4-1.6-7-5.4-7-10V6z" /><path d="M9 12l2 2 4-4" /></svg>
+            </div>
+            <h3>Pensado para el AI Act</h3>
+            <p>El Reglamento Europeo de IA considera de alto riesgo la IA que se usa en selección de personal. Por eso Talentra se basa en la supervisión humana: cada dato muestra la frase del CV que lo respalda y la decisión siempre es de una persona.</p>
+          </article>
+          <article class="card trust-card reveal">
+            <div class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+            </div>
+            <h3>Un espacio privado por empresa</h3>
+            <p>Cada organización tiene su propio espacio, y cada persona de tu equipo ve solo lo que le permites ver.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -435,8 +505,20 @@
             <p>La experiencia y los años en cada habilidad, los idiomas y su nivel, los estudios, la ubicación y las empresas en las que ha trabajado cada persona. Cada dato viene con la frase del CV original que lo respalda, para que puedas comprobarlo de un vistazo.</p>
           </details>
           <details class="faq-item">
+            <summary>¿En qué idiomas puede estar el CV?</summary>
+            <p>Talentra lee currículums en español, en inglés y en otros idiomas habituales, así que puedes tener en el mismo sitio los CVs de candidatos de distintos países.</p>
+          </details>
+          <details class="faq-item">
             <summary>¿Talentra descarta o puntúa a los candidatos?</summary>
             <p>No. Talentra analiza los currículums para que encuentres a las personas, pero ni descarta ni elige a nadie: no puntúa, no hace rankings y no decide. La decisión es siempre tuya.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Dónde se guardan los CVs y quién puede verlos?</summary>
+            <p>En servidores de la Unión Europea, y se tratan conforme al RGPD. Cada organización tiene su propio espacio privado: solo pueden verlos las personas de tu equipo a las que tú des acceso, y nunca se comparten con otras empresas.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cómo encaja Talentra con el AI Act?</summary>
+            <p>El Reglamento Europeo de Inteligencia Artificial (AI Act) considera de alto riesgo la IA que se usa en selección de personal y exige que haya supervisión humana. Talentra está pensada desde el principio con ese criterio: no toma decisiones automatizadas, no puntúa ni hace rankings, cada dato muestra la frase del CV que lo respalda y la decisión es siempre de una persona.</p>
           </details>
           <details class="faq-item">
             <summary>¿Cómo se buscan candidatos en Talentra?</summary>
@@ -444,7 +526,15 @@
           </details>
           <details class="faq-item">
             <summary>¿Hay que instalar algo para analizar los CVs?</summary>
-            <p>No. Talentra funciona desde el navegador: subes los currículums de uno en uno o todos juntos y empiezas a buscar, sin instalaciones ni configuraciones.</p>
+            <p>No. Talentra funciona desde el navegador: subes los currículums en PDF, de uno en uno o todos juntos en un ZIP, y empiezas a buscar, sin instalaciones ni configuraciones.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Qué formatos de CV acepta?</summary>
+            <p>Currículums en PDF, de uno en uno o varios a la vez. Si tienes muchos, puedes subir un archivo ZIP con todos los PDF dentro y Talentra los procesa de una vez.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cuántos CVs puedo subir?</summary>
+            <p>Todos los que tenga tu empresa, desde unas decenas hasta miles. Puedes subir todo tu archivo de una vez en un ZIP y seguir añadiendo los nuevos según lleguen.</p>
           </details>
           <details class="faq-item">
             <summary>¿Puede usar Talentra todo mi equipo?</summary>
@@ -457,14 +547,38 @@
       </div>
     </section>
 
+    <!-- ABOUT -->
+    <section class="section about" id="nosotros" data-section="nosotros">
+      <div class="about-grid">
+        <div class="reveal">
+          <span class="eyebrow">Quiénes somos</span>
+          <h2>Somos <em>Jimena e Ismael.</em></h2>
+          <p class="lead">Creemos que encontrar a la persona adecuada no debería significar empezar de cero en cada vacante, ni dejar que una máquina decida quién merece una oportunidad.</p>
+          <p>Por eso hacemos Talentra: para que los CVs que ya tienes vuelvan a contar y la decisión siga siendo de una persona. Si nos escribes, te contestamos nosotros.</p>
+        </div>
+        <div class="founders reveal">
+          <div class="founder">
+            <span class="founder-av" style="--h:330" aria-hidden="true">J</span>
+            <div><strong>Jimena</strong><small>Equipo fundador · 3 años de experiencia en diseño de soluciones</small></div>
+          </div>
+          <div class="founder">
+            <span class="founder-av" style="--h:265" aria-hidden="true">I</span>
+            <div><strong>Ismael</strong><small>Equipo fundador · 10 años de experiencia en diseño de soluciones</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA -->
-    <section class="cta" id="empezar" data-section="cta">
+    <section class="cta" id="lista-espera" data-section="cta">
       <div class="cta-inner reveal">
         <h2>Deja de buscar fuera<br /><span class="grad">lo que ya tienes dentro.</span></h2>
         <p class="cta-sub">Abrimos acceso limitado. Apúntate y te avisamos en cuanto haya plaza para tu equipo. Es gratis y no te compromete a nada.</p>
         <div class="cta-actions">
           <a class="btn" href="#lista-espera" data-waitlist data-track="cta">Quiero acceso anticipado <span class="arrow">→</span></a>
         </div>
+        <!-- Shown only if the form can't open (JS blocked or failed, very old browser) -->
+        <p class="wl-fallback">¿No se abre el formulario? Escríbenos a <a href="mailto:hola@talentra.example?subject=Lista%20de%20espera%20de%20Talentra&amp;body=Nombre%3A%20%0AEmpresa%3A%20%0ACargo%3A%20">hola@talentra.example</a> con tu nombre y tu empresa y te apuntamos.</p>
       </div>
     </section>
 
@@ -474,7 +588,7 @@
         <div>
           <span class="eyebrow">Contacto</span>
           <h2>¿Hablamos?</h2>
-          <p>¿Tienes dudas o quieres saber si Talentra encaja con tu equipo? Escríbenos y te responderá una persona de nuestro equipo, no una IA.</p>
+          <p>¿Tienes dudas o quieres saber si Talentra encaja con tu equipo? Escríbenos y te responderemos nosotros, Jimena o Ismael, no una IA.</p>
         </div>
         <div class="contact-actions">
           <a class="btn" href="mailto:hola@talentra.example">Escríbenos <span class="arrow">→</span></a>
@@ -492,7 +606,7 @@
       <a href="cookies.html">Cookies</a>
       <a href="terminos.html">Términos</a>
       <a href="aviso-legal.html">Aviso legal</a>
-      <a href="#contacto" data-popup="contact">Contacto</a>
+      <a href="#contacto">Contacto</a>
     </nav>
     <small>© <span id="year"></span> Talentra</small>
   </footer>
@@ -578,21 +692,10 @@
     <div class="lg-body legal" id="lgBody" tabindex="-1"></div>
   </dialog>
 
-  <template id="contactPopup">
-    <span class="eyebrow">Contacto</span>
-    <h1 id="lgTitle">¿Hablamos?</h1>
-    <p>¿Tienes dudas o quieres saber si Talentra encaja con tu equipo? Escríbenos y te responderá una persona de nuestro equipo, no una IA.</p>
-    <p class="lg-mail"><a href="mailto:hola@talentra.example">hola@talentra.example</a></p>
-    <div class="lg-actions">
-      <a class="btn" href="mailto:hola@talentra.example">Escríbenos <span class="arrow">→</span></a>
-      <button class="btn btn-ghost" type="button" data-copy="hola@talentra.example">Copiar email</button>
-    </div>
-  </template>
-
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
-  <script src="analytics.js?v=17"></script>
-  <script src="script.js?v=17"></script>
-  <script src="waitlist.js?v=17"></script>
-  <script src="legal-popup.js?v=17"></script>
+  <script src="analytics.js?v=20"></script>
+  <script src="script.js?v=20"></script>
+  <script src="waitlist.js?v=20"></script>
+  <script src="legal-popup.js?v=20"></script>
 </body>
 </html>
