@@ -29,14 +29,10 @@ Estado: acceso anticipado con lista de espera (gratis y sin compromiso). Idioma:
 
 Equipos de selección, recruiters y departamentos de recursos humanos que acumulan cientos o miles de CVs y quieren volver a encontrar a candidatos que ya les enviaron su currículum.
 
-## Quiénes somos
-
-Talentra la hacen Jimena (3 años de experiencia en diseño de soluciones) e Ismael (10 años de experiencia en diseño de soluciones).
-
 ## Enlaces
 
 - [Web](https://solutions-with-ai.github.io/talentra-landing/): presentación del producto y lista de espera
 - [Preguntas frecuentes](https://solutions-with-ai.github.io/talentra-landing/#preguntas)
 - [Política de privacidad](https://solutions-with-ai.github.io/talentra-landing/privacidad.html)
 - [Términos y condiciones](https://solutions-with-ai.github.io/talentra-landing/terminos.html)
-- Contacto: hola@talentra.example
+- Contacto: talentra.encuentratutalento@gmail.com

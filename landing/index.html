@@ -39,11 +39,7 @@
         "name": "Talentra",
         "url": "https://solutions-with-ai.github.io/talentra-landing/",
         "logo": "https://solutions-with-ai.github.io/talentra-landing/logo.png",
-        "email": "hola@talentra.example",
-        "founder": [
-          { "@type": "Person", "name": "Jimena", "description": "3 años de experiencia en diseño de soluciones" },
-          { "@type": "Person", "name": "Ismael", "description": "10 años de experiencia en diseño de soluciones" }
-        ]
+        "email": "talentra.encuentratutalento@gmail.com"
       },
       {
         "@type": "WebSite",
@@ -187,8 +183,8 @@
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="apple-touch-icon" href="logo.png" />
   <link rel="preload" href="fonts/red-hat-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="fonts.css?v=20" />
-  <link rel="stylesheet" href="styles.css?v=20" />
+  <link rel="stylesheet" href="fonts.css?v=23" />
+  <link rel="stylesheet" href="styles.css?v=23" />
 </head>
 <body>
   <canvas id="constellation" aria-hidden="true"></canvas>
@@ -197,13 +193,12 @@
 
   <!-- NAV -->
   <header class="nav" id="nav">
-    <a class="brand" href="#top"><img src="logo.png" alt="" width="34" height="34" />Talentra</a>
+    <a class="brand" href="#top" aria-label="Talentra"><img src="logo.png" alt="" width="34" height="34" /><span class="brand-name">Talentra</span></a>
     <nav class="nav-links" id="navLinks" aria-label="Principal">
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#funciones">Funciones</a>
       <a href="#privacidad">Privacidad</a>
       <a href="#preguntas">FAQ</a>
-      <a href="#nosotros">Nosotros</a>
     </nav>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar a modo claro">
@@ -213,7 +208,7 @@
       <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       </button>
-      <a class="btn btn-small" href="#lista-espera" data-waitlist data-track="nav">Lista de espera</a>
+      <a class="btn btn-small" href="#lista-espera" data-waitlist data-track="nav"><span class="lbl-long">Lista de espera</span><span class="lbl-short">Apúntate</span></a>
     </div>
   </header>
 
@@ -547,28 +542,6 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section about" id="nosotros" data-section="nosotros">
-      <div class="about-grid">
-        <div class="reveal">
-          <span class="eyebrow">Quiénes somos</span>
-          <h2>Somos <em>Jimena e Ismael.</em></h2>
-          <p class="lead">Creemos que encontrar a la persona adecuada no debería significar empezar de cero en cada vacante, ni dejar que una máquina decida quién merece una oportunidad.</p>
-          <p>Por eso hacemos Talentra: para que los CVs que ya tienes vuelvan a contar y la decisión siga siendo de una persona. Si nos escribes, te contestamos nosotros.</p>
-        </div>
-        <div class="founders reveal">
-          <div class="founder">
-            <span class="founder-av" style="--h:330" aria-hidden="true">J</span>
-            <div><strong>Jimena</strong><small>Equipo fundador · 3 años de experiencia en diseño de soluciones</small></div>
-          </div>
-          <div class="founder">
-            <span class="founder-av" style="--h:265" aria-hidden="true">I</span>
-            <div><strong>Ismael</strong><small>Equipo fundador · 10 años de experiencia en diseño de soluciones</small></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- CTA -->
     <section class="cta" id="lista-espera" data-section="cta">
       <div class="cta-inner reveal">
@@ -578,7 +551,7 @@
           <a class="btn" href="#lista-espera" data-waitlist data-track="cta">Quiero acceso anticipado <span class="arrow">→</span></a>
         </div>
         <!-- Shown only if the form can't open (JS blocked or failed, very old browser) -->
-        <p class="wl-fallback">¿No se abre el formulario? Escríbenos a <a href="mailto:hola@talentra.example?subject=Lista%20de%20espera%20de%20Talentra&amp;body=Nombre%3A%20%0AEmpresa%3A%20%0ACargo%3A%20">hola@talentra.example</a> con tu nombre y tu empresa y te apuntamos.</p>
+        <p class="wl-fallback">¿No se abre el formulario? Escríbenos a <a href="mailto:talentra.encuentratutalento@gmail.com?subject=Lista%20de%20espera%20de%20Talentra&amp;body=Nombre%3A%20%0AEmpresa%3A%20%0ACargo%3A%20">talentra.encuentratutalento@gmail.com</a> con tu nombre y tu empresa y te apuntamos.</p>
       </div>
     </section>
 
@@ -588,11 +561,11 @@
         <div>
           <span class="eyebrow">Contacto</span>
           <h2>¿Hablamos?</h2>
-          <p>¿Tienes dudas o quieres saber si Talentra encaja con tu equipo? Escríbenos y te responderemos nosotros, Jimena o Ismael, no una IA.</p>
+          <p>¿Tienes dudas o quieres saber si Talentra encaja con tu equipo? Escríbenos y te responderá una persona de nuestro equipo, no una IA.</p>
         </div>
         <div class="contact-actions">
-          <a class="btn" href="mailto:hola@talentra.example">Escríbenos <span class="arrow">→</span></a>
-          <a class="contact-mail" href="mailto:hola@talentra.example">hola@talentra.example</a>
+          <a class="btn" href="mailto:talentra.encuentratutalento@gmail.com">Escríbenos <span class="arrow">→</span></a>
+          <a class="contact-mail" href="mailto:talentra.encuentratutalento@gmail.com">talentra.encuentratutalento@gmail.com</a>
         </div>
       </div>
     </section>
@@ -660,7 +633,7 @@
           </div>
 
           <p class="wl-error" id="wlError" role="alert" hidden>
-            No hemos podido enviarlo. Inténtalo de nuevo en un momento o escríbenos a <a href="mailto:hola@talentra.example">hola@talentra.example</a>.
+            No hemos podido enviarlo. Inténtalo de nuevo en un momento o escríbenos a <a href="mailto:talentra.encuentratutalento@gmail.com">talentra.encuentratutalento@gmail.com</a>.
           </p>
 
           <button class="btn wl-submit" type="submit">
@@ -693,9 +666,9 @@
   </dialog>
 
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
-  <script src="analytics.js?v=20"></script>
-  <script src="script.js?v=20"></script>
-  <script src="waitlist.js?v=20"></script>
-  <script src="legal-popup.js?v=20"></script>
+  <script src="analytics.js?v=23"></script>
+  <script src="script.js?v=23"></script>
+  <script src="waitlist.js?v=23"></script>
+  <script src="legal-popup.js?v=23"></script>
 </body>
 </html>
