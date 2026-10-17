@@ -728,28 +728,6 @@ html:has(.lg[open]) { overflow: hidden; }
 :root[data-theme="light"] .trust-icon { background: linear-gradient(160deg, #ffffff, #f6f3fa); border-color: rgba(20, 26, 46, 0.08); box-shadow: 0 16px 32px -20px rgba(255, 84, 135, 0.6); }
 :root[data-theme="light"] .trust-icon svg { stroke: #e8457a; }
 
-/* ---------- About ---------- */
-.about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center; }
-.about h2 { font-size: clamp(34px, 4.4vw, 58px); line-height: 1.05; letter-spacing: -0.04em; font-weight: 800; margin: 14px 0 18px; }
-.about h2 em { color: #ffc2d3; }
-.about .lead { margin: 0 0 16px; }
-.about p:not(.lead) { color: var(--muted); font-size: 16.5px; max-width: 600px; margin: 0; }
-.founders { display: grid; gap: 14px; --d: 0.15s; }
-.founder {
-  display: flex; align-items: center; gap: 16px; padding: 20px 22px; border-radius: 20px;
-  border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
-}
-.founder-av {
-  width: 56px; height: 56px; flex: 0 0 auto; border-radius: 16px; display: grid; place-items: center;
-  font-size: 22px; font-weight: 800; color: #fff;
-  background: linear-gradient(135deg, hsl(var(--h) 80% 62%), hsl(calc(var(--h) + 30) 80% 55%));
-}
-.founder strong { display: block; font-size: 19px; }
-.founder small { display: block; margin-top: 2px; line-height: 1.4; color: var(--muted); font-size: 13.5px; }
-@media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
-:root[data-theme="light"] .about h2 em { color: #e0467a; }
-:root[data-theme="light"] .founder { background: #fff; border-color: rgba(20, 26, 46, 0.1); box-shadow: 0 20px 50px -30px rgba(40, 30, 80, 0.2); }
-
 /* ---------- Touch screens ---------- */
 /* A tap leaves :hover stuck on the element: no lifts or glows there */
 @media (hover: none) {
@@ -770,3 +748,23 @@ html:has(.lg[open]) { overflow: hidden; }
 .wl-fallback { margin: 22px auto 0; max-width: 520px; font-size: 14.5px; color: var(--muted); }
 .wl-fallback a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 .wl-ready .wl-fallback { display: none; }
+
+/* ---------- Very narrow screens (small phones, folded foldables) ---------- */
+.lbl-short { display: none; }
+/* The hero status card sticks out 30px: only safe when there's room beside the 1240px hero */
+@media (max-width: 1100px) { .status-card { right: -6px; } }
+@media (max-width: 380px) {
+  .nav { width: calc(100% - 20px); padding-left: 12px; }
+  .lbl-long { display: none; }
+  .lbl-short { display: inline; }
+  .nav-right { gap: 5px; }
+  .theme-toggle, .nav .menu-toggle { width: 36px; height: 36px; }
+  .nav .btn-small { padding: 9px 12px; }
+}
+@media (max-width: 300px) {
+  .nav .brand-name { display: none; }
+  .td-row { grid-template-columns: auto 1fr; grid-template-areas: "av name" "av role"; row-gap: 4px; }
+  .td-role { justify-self: start; }
+}
+.contact-mail { overflow-wrap: anywhere; }
+.legal a, .wl-fallback a { overflow-wrap: anywhere; }
