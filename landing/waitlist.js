@@ -1,13 +1,9 @@
 /*
  * Formulario de la lista de espera.
  *
- * PENDIENTE: pon en WAITLIST_ENDPOINT la URL que recibe las solicitudes. Sirve cualquiera que acepte un POST
- * de formulario y responda 2xx, por ejemplo:
- *   · Google Sheets: la URL de la "aplicación web" de tools/waitlist-google-sheet.gs (https://script.google.com/macros/s/…/exec)
- *   · Formspree: https://formspree.io/f/xxxxxxx
- *
- * Mientras esté vacío, en local (127.0.0.1 / localhost) el envío se simula para poder probarlo; publicado,
- * muestra un error con el email de contacto para no perder a nadie sin avisar.
+ * La meta talentra-waitlist-endpoint apunta al Worker con contrato JSON y Turnstile.
+ * Sin configuración no se simula éxito, tampoco en localhost. No registra datos personales en consola.
+ * Configuración, pruebas y activación: tools/cloudflare/README.md.
  *
  * Cualquier enlace a #lista-espera abre el formulario, también al llegar a la web con esa URL
  * (p. ej. https://…/#lista-espera en una campaña o un post).
@@ -15,7 +11,7 @@
  * a la sección del CTA, que muestra el email para apuntarse a mano.
  */
 (() => {
-  const WAITLIST_ENDPOINT = "";
+  const WAITLIST_ENDPOINT = document.querySelector('meta[name="talentra-waitlist-endpoint"]')?.content.trim() || '';
 
   const dlg = document.getElementById("waitlist");
   if (!dlg || typeof dlg.showModal !== "function") return;
@@ -29,6 +25,31 @@
   const errorBox = dlg.querySelector("#wlError");
   const track = (name, props) => window.talentraTrack?.(name, props);
   const isLocal = ["127.0.0.1", "localhost", ""].includes(location.hostname);
+  const captchaBox = dlg.querySelector('#wlChallenge');
+  let widgetId, token = '', challengeLoading;
+  const explain = message => {
+    errorBox.hidden = false;
+    const detail = dlg.querySelector('#wlErrorDetail');
+    if (detail) detail.textContent = message;
+  };
+  const ensureChallenge = () => challengeLoading ||= (async () => {
+    if (!WAITLIST_ENDPOINT) throw new Error('not_configured');
+    const endpoint = new URL(WAITLIST_ENDPOINT);
+    if (endpoint.pathname !== '/api/waitlist' || (endpoint.protocol !== 'https:' && !(isLocal && endpoint.hostname === '127.0.0.1'))) throw new Error('not_configured');
+    const response = await fetch(endpoint.origin + '/api/waitlist/config', {cache:'no-store',signal:AbortSignal.timeout(12000)});
+    if (!response.ok) throw new Error('not_configured');
+    const config = await response.json();
+    if (!config.turnstile_site_key) throw new Error('not_configured');
+    if (config.mode === 'test') captchaBox.setAttribute('data-test-mode','');
+    dlg.querySelector('#wlTestNotice').hidden = config.mode !== 'test';
+    if (!window.turnstile) await new Promise((resolve,reject) => {
+      const script = document.createElement('script');script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';script.async=true;
+      const timeout=setTimeout(()=>reject(new Error('challenge_unavailable')),12000);
+      script.onload=()=>{clearTimeout(timeout);resolve();};script.onerror=()=>{clearTimeout(timeout);reject(new Error('challenge_unavailable'));};document.head.appendChild(script);
+    });
+    widgetId=window.turnstile.render('#wlChallenge',{sitekey:config.turnstile_site_key,action:'talentra_waitlist',theme:'auto',
+      callback:value=>{token=value;},'expired-callback':()=>{token='';},'error-callback':()=>{token='';explain('No podemos completar la comprobación de seguridad. Inténtalo de nuevo.');}});
+  })().catch(error=>{challengeLoading=null;throw error;});
 
   let source = "direct", started = false, sent = false, triedSubmit = false;
 
@@ -38,6 +59,7 @@
     started = false;
     if (!dlg.open) dlg.showModal();
     (sent ? dlg.querySelector("#wlDoneTitle") : form.elements.nombre).focus();
+    if (!sent) ensureChallenge().catch(()=>explain('El formulario todavía no está disponible. Puedes escribirnos al correo de contacto.'));
   };
 
   document.querySelectorAll('[data-waitlist], a[href="#lista-espera"]').forEach((a) =>
@@ -64,7 +86,7 @@
   /* ---------- Validation ---------- */
   const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
   const rules = [
-    [form.elements.nombre, (el) => (el.value.trim() ? "" : "Escribe tu nombre.")],
+    [form.elements.nombre, (el) => (el.value.trim().length >= 2 ? "" : "Escribe tu nombre, con al menos dos caracteres.")],
     [form.elements.email, (el) => (!el.value.trim() ? "Escribe tu email." : emailOk(el.value) ? "" : "Este email no parece válido.")],
     [form.elements.consentimiento, (el) => (el.checked ? "" : "Necesitamos tu permiso para guardar tus datos.")],
   ];
@@ -85,39 +107,33 @@
 
   /* ---------- Submit ---------- */
   const send = async (data) => {
-    if (!WAITLIST_ENDPOINT) {
-      if (!isLocal) throw new Error("WAITLIST_ENDPOINT vacío");
-      console.warn("[waitlist] Sin WAITLIST_ENDPOINT: envío simulado en local.", Object.fromEntries(data));
-      await new Promise((r) => setTimeout(r, 700));
-      return;
-    }
-    // URL-encoded body: a "simple" CORS request that both Google Apps Script and Formspree-style services accept
-    const res = await fetch(WAITLIST_ENDPOINT, { method: "POST", body: new URLSearchParams(data), headers: { Accept: "application/json" } });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    await ensureChallenge();
+    if (!token) throw new Error('challenge');
+    const payload={name:data.get('nombre'),email:data.get('email'),company:data.get('empresa')||'',role:data.get('cargo')||'',
+      consent:data.get('consentimiento')==='si',website:data.get('web')||'',source:String(data.get('fuente')||'direct').slice(0,80),language:'es',turnstile_token:token};
+    const res = await fetch(WAITLIST_ENDPOINT, { method: 'POST', body: JSON.stringify(payload), headers: {'Content-Type':'application/json',Accept:'application/json'},signal:AbortSignal.timeout(15000) });
+    const result=await res.json().catch(()=>({}));
+    if (res.status!==202||result.status!=='received') throw new Error(res.status===429?'rate_limit':result.error||'unavailable');
   };
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (submitBtn.disabled) return;
     triedSubmit = true;
     errorBox.hidden = true;
     const invalid = validate();
     if (invalid) { invalid.focus(); return; }
 
     const data = new FormData(form);
-    const isBot = !!data.get("web");
-    data.delete("web");
     data.set("fuente", source);
-    data.set("pagina", location.origin + location.pathname);
-    data.set("referrer", document.referrer);
     const params = new URLSearchParams(location.search);
-    for (const k of ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]) if (params.get(k)) data.set(k, params.get(k));
-    data.set("fecha", new Date().toISOString());
+    if (params.get('utm_source')) data.set('fuente',params.get('utm_source').slice(0,80));
 
     submitBtn.disabled = true;
     submitBtn.setAttribute("aria-busy", "true");
     submitLabel.textContent = "Enviando…";
     try {
-      if (!isBot) await send(data);
+      await send(data);
       sent = true;
       track("Waitlist submit", { location: source });
       dlg.querySelector("#wlDoneEmail").textContent = data.get("email");
@@ -125,13 +141,13 @@
       doneStep.hidden = false;
       dlg.querySelector("#wlDoneTitle").focus();
     } catch (err) {
-      console.error("[waitlist]", err);
       track("Waitlist error", { location: source });
-      errorBox.hidden = false;
+      explain(err.message==='rate_limit'?'Has realizado varios intentos. Espera antes de volver a enviar.':err.message==='fictional_only'?'Esta vista es de pruebas: utiliza un correo ficticio terminado en @example.test.':err.message==='challenge'?'Completa la comprobación de seguridad antes de enviar.':err.message==='fields'?'Revisa el nombre y el correo: algún dato no tiene el formato esperado.':'No hemos podido confirmar el guardado. Tus datos siguen aquí; puedes reintentar sin duplicar la inscripción.');
     } finally {
       submitBtn.disabled = false;
       submitBtn.removeAttribute("aria-busy");
       submitLabel.textContent = "Quiero tener acceso anticipado";
+      token='';if(widgetId!==undefined)window.turnstile?.reset(widgetId);
     }
   });
 
@@ -140,6 +156,7 @@
     triedSubmit = false;
     sent = false;
     started = false;
+    errorBox.hidden = true;
     for (const [el] of rules) {
       el.closest(".wl-field").removeAttribute("data-invalid");
       el.removeAttribute("aria-invalid");

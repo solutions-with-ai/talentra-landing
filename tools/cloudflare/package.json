@@ -1,0 +1,12 @@
+{
+  "name": "talentra-forms",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=22.13"},
+  "scripts": {
+    "test": "node --test tests/waitlist.test.mjs",
+    "test:integration": "node --test tests/integration.mjs",
+    "deploy:check": "wrangler deploy --dry-run"
+  },
+  "devDependencies": {"wrangler": "^4.0.0"}
+}

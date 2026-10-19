@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Public URL only. All credentials stay server-side in Cloudflare Secrets. -->
+  <meta name="talentra-waitlist-endpoint" content="https://talentra-forms-staging.talentra-encuentratutalento.workers.dev/api/waitlist" />
   <title>Talentra · Analiza currículums y encuentra candidatos</title>
   <meta name="description" content="Herramienta para analizar currículums: extrae experiencia, habilidades e idiomas de cada CV y encuentra candidatos. Sin descartes automáticos." />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -184,7 +186,7 @@
   <link rel="apple-touch-icon" href="logo.png" />
   <link rel="preload" href="fonts/red-hat-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="fonts.css?v=23" />
-  <link rel="stylesheet" href="styles.css?v=23" />
+  <link rel="stylesheet" href="styles.css?v=25" />
 </head>
 <body>
   <canvas id="constellation" aria-hidden="true"></canvas>
@@ -600,21 +602,21 @@
           <div class="wl-grid">
             <div class="wl-field">
               <label for="wlNombre">Nombre</label>
-              <input id="wlNombre" name="nombre" type="text" autocomplete="name" required />
+              <input id="wlNombre" name="nombre" type="text" autocomplete="name" minlength="2" maxlength="160" required />
               <small class="wl-msg" id="wlNombreMsg"></small>
             </div>
             <div class="wl-field">
               <label for="wlEmailInput">Email</label>
-              <input id="wlEmailInput" name="email" type="email" autocomplete="email" inputmode="email" required />
+              <input id="wlEmailInput" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required />
               <small class="wl-msg" id="wlEmailInputMsg"></small>
             </div>
             <div class="wl-field">
               <label for="wlEmpresa">Empresa <span class="wl-opt">(opcional)</span></label>
-              <input id="wlEmpresa" name="empresa" type="text" autocomplete="organization" />
+              <input id="wlEmpresa" name="empresa" type="text" autocomplete="organization" maxlength="160" />
             </div>
             <div class="wl-field">
               <label for="wlCargo">Cargo <span class="wl-opt">(opcional)</span></label>
-              <input id="wlCargo" name="cargo" type="text" autocomplete="organization-title" />
+              <input id="wlCargo" name="cargo" type="text" autocomplete="organization-title" maxlength="80" />
             </div>
           </div>
 
@@ -631,9 +633,12 @@
             </label>
             <small class="wl-msg" id="wlConsentMsg"></small>
           </div>
+          <p class="wl-mode-note">Responsable: Jimena Rioja · Proyecto Talentra. Usaremos tus datos solo para gestionar el acceso anticipado, durante un máximo de 180 días. Puedes solicitar la baja en <a href="mailto:talentra.encuentratutalento@gmail.com">talentra.encuentratutalento@gmail.com</a>.</p>
 
+          <p id="wlTestNotice" class="wl-mode-note" role="note" hidden>Vista de pruebas. Usa solo datos ficticios y correos terminados en @example.test.</p>
+          <div id="wlChallenge" class="wl-challenge"></div>
           <p class="wl-error" id="wlError" role="alert" hidden>
-            No hemos podido enviarlo. Inténtalo de nuevo en un momento o escríbenos a <a href="mailto:talentra.encuentratutalento@gmail.com">talentra.encuentratutalento@gmail.com</a>.
+            <span id="wlErrorDetail">No hemos podido guardar tu solicitud.</span> Puedes escribirnos a <a href="mailto:talentra.encuentratutalento@gmail.com">talentra.encuentratutalento@gmail.com</a>.
           </p>
 
           <button class="btn wl-submit" type="submit">
@@ -644,8 +649,8 @@
 
       <div class="wl-step wl-done" id="wlDoneStep" hidden>
         <div class="wl-done-icon" aria-hidden="true">✓</div>
-        <h2 tabindex="-1" id="wlDoneTitle">¡Estás <em>dentro!</em></h2>
-        <p class="wl-sub">Te hemos apuntado a la lista de espera. Te escribiremos a <b id="wlDoneEmail"></b> en cuanto haya plaza para tu equipo.</p>
+        <h2 tabindex="-1" id="wlDoneTitle">¡Solicitud <em>recibida!</em></h2>
+        <p class="wl-sub">Si <b id="wlDoneEmail"></b> no estaba ya registrado, hemos guardado tu solicitud. Te contactaremos sobre el acceso; no necesitas enviarla de nuevo.</p>
         <div class="wl-done-actions">
           <button class="btn" type="button" data-close>Perfecto</button>
           <button class="btn btn-ghost" type="button" id="wlAnother">Apuntar a otra persona</button>
@@ -668,7 +673,7 @@
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
   <script src="analytics.js?v=23"></script>
   <script src="script.js?v=23"></script>
-  <script src="waitlist.js?v=23"></script>
+  <script src="waitlist.js?v=25"></script>
   <script src="legal-popup.js?v=23"></script>
 </body>
 </html>

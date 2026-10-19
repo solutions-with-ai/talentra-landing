@@ -1,0 +1,19 @@
+{
+  "name": "talentra-forms-staging",
+  "account_id": "8032bfdb5a43d17d464a99edd12d60da",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-19",
+  "workers_dev": true,
+  "vars": {
+    "WAITLIST_MODE": "public",
+    "MAIL_ENABLED": "true",
+    "ALLOWED_ORIGINS": "https://solutions-with-ai.github.io",
+    "ALLOWED_HOSTNAME": "solutions-with-ai.github.io",
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAFb3Iq7o0Y13pNhM",
+    "PRIVACY_NAME": "Jimena Rioja, responsable del proyecto Talentra",
+    "PRIVACY_EMAIL": "talentra.encuentratutalento@gmail.com"
+  },
+  "d1_databases": [{"binding":"DB","database_name":"talentra-waitlist-production","database_id":"02ec5430-4463-4249-b5ec-5fb3b5e1e992","migrations_dir":"migrations"}],
+  "triggers": {"crons": ["*/5 * * * *"]},
+  "observability": {"enabled": true}
+}
