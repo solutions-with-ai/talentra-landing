@@ -768,3 +768,7 @@ html:has(.lg[open]) { overflow: hidden; }
 }
 .contact-mail { overflow-wrap: anywhere; }
 .legal a, .wl-fallback a { overflow-wrap: anywhere; }
+/* Online waitlist security states share the existing theme and do not hide provider errors. */
+.wl-challenge { min-height: 65px; margin: 16px 0; max-width: 100%; }
+.wl-mode-note { padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; font-size: .8rem; line-height: 1.6; color: var(--muted); overflow-wrap: anywhere; }
+.wl-error a { overflow-wrap: anywhere; }
